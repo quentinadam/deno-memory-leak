@@ -1,9 +1,28 @@
 # deno-memory-leak
 
 The following very simple program will ostensibly (at a rate of ~1MB/second) leak memory in Deno (**only on Deno versions >= 1.31.0**):
-```
+```ts
 const file = new URL('./hello.txt', import.meta.url).pathname;
 while (true) {
+  await Deno.readFileSync(file);
+}
+```
+
+Here is a slightly longer version of the program that will output the memory usage every second :
+
+```ts
+console.log('Deno version', Deno.version.deno);
+
+const file = new URL('./hello.txt', import.meta.url).pathname;
+
+let timestamp = new Date();
+
+while (true) {
+  if (Date.now() >= timestamp.valueOf()) {
+    const bytes = Deno.memoryUsage().rss;
+    console.log(timestamp.toISOString(), Math.floor(bytes / (1024 * 1024) * 10) / 10);
+    timestamp = new Date(timestamp.valueOf() + 1000);
+  }
   await Deno.readFileSync(file);
 }
 ```
