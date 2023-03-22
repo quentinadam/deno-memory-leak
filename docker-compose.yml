@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  monitoring:
+    container_name: monitoring
+    build:
+      context: ./monitoring
+    image: "monitoring:latest"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - INFLUX_HOST=${INFLUX_HOST}
+      - INFLUX_ORG=${INFLUX_ORG}
+      - INFLUX_BUCKET=${INFLUX_BUCKET}
+      - INFLUX_TOKEN=${INFLUX_TOKEN}
+  program:
+    container_name: program
+    build:
+      context: ./program
+    image: "program:latest"

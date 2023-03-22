@@ -1,0 +1,12 @@
+{
+  "fmt": {
+    "options": {
+      "singleQuote": true,
+      "lineWidth": 120
+    }
+  },
+  "tasks": {
+    "check": "deno check main.ts",
+    "run": "deno run --allow-read=./hello.txt main.ts"
+  }
+}
