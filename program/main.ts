@@ -10,5 +10,5 @@ while (true) {
     console.log(timestamp.toISOString(), Math.floor(bytes / (1024 * 1024) * 10) / 10);
     timestamp = new Date(timestamp.valueOf() + 1000);
   }
-  Deno.readFile(file);
+  Deno.readFileSync(file);
 }
