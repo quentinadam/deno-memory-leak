@@ -4,7 +4,7 @@ The following very simple program will ostensibly (at a rate of ~1MB/second) lea
 ```ts
 const file = new URL('./hello.txt', import.meta.url).pathname;
 while (true) {
-  await Deno.readFileSync(file);
+  Deno.readFileSync(file);
 }
 ```
 
@@ -23,7 +23,7 @@ while (true) {
     console.log(timestamp.toISOString(), Math.floor(bytes / (1024 * 1024) * 10) / 10);
     timestamp = new Date(timestamp.valueOf() + 1000);
   }
-  await Deno.readFileSync(file);
+  Deno.readFileSync(file);
 }
 ```
 
